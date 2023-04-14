@@ -32,6 +32,12 @@ if [ "$?" -ne 0 ]; then
                 echo "Auto-assign public IP addresses enabled for subnet ${SUBNET_ID3}!"
     fi
 }
+create_igw() {
+    IGW_ID=$(aws ec2 create-internet-gateway --query InternetGateway.InternetGatewayId --output text)
+    if [ -z "$IGW_ID" ]; then
+        echo "Error creating Internet Gateway!"
+        exit 1
+    fi
     aws ec2 create-tags --resources "$IGW_ID" --tags Key=Name,Value=MyIGW
     echo $IGW_ID
 }
@@ -58,11 +64,6 @@ create_route_table() {
     aws ec2 create-tags --resources "$RTB_ID" --tags Key=Name,Value=MyRTB
     echo $RTB_ID
 }
-
-create_route() {
-    local RTB_ID="$1"
-    local IGW_ID="$2"
-    aws ec2 create-route --route-table-id "${RTB_ID}" --destination-cidr-block 0.0.0.0/0 --gateway-id "${IGW_ID}"
 create_route() {
     local RTB_ID="$1"
     local IGW_ID="$2"
@@ -86,4 +87,5 @@ associate_route_table() {
                 echo "Associated the route table with the public subnet!!"
     fi
 }
+
 
