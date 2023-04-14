@@ -75,9 +75,3 @@ clean_vpc() {
                 echo "Error deleting VPC"
   fi
 }
-#Main Script
-clean_ec2
-clean_subnets
-clean_igw
-clean_sg
-clean_vpc
