@@ -1,0 +1,1 @@
+The main_script script takes a "create" or "delete" argument, and depending on the argument either creates a VPC with its components and an EC2 instance in aws using the ec2_sg_create_util and vpc_create_util toolsrs, or deletes all specified components using the delete_util tool
