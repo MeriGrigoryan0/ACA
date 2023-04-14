@@ -40,7 +40,7 @@ script() {
         elif [ "$arg" = "delete" ]; then
 
         clean_ec2
-        clean_subnets
+        clean_subnets_rtbs
         clean_igw
         clean_sg
         clean_vpc
